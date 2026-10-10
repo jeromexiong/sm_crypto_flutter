@@ -66,6 +66,14 @@ void main() {
           'b67a77a89564b7be13fccf456e0ec39ad564eb46f4c54c6946b1d548efc4078d');
       expect(SM3.hash('丧丙上䠉䰋不亐乑'), isNot(SM3.hash('鱏8fpT肙腳荧HNQ')));
     });
+
+    test('long text (multi-block, 960 bytes)', () {
+      // js 的 'sm3: long text' 用例依赖 test.jpg（未随仓库分发），
+      // 这里用等价的多分组输入替代，期望值由 sm-crypto-js 0.5.7 生成。
+      final long = List.filled(40, 'abcdefghABCDEFGH12345678').join();
+      expect(SM3.hash(long),
+          'fbc81fe9a6b3a8212f271c417c8b4cc0f2e6926041904ec60288d3b550c0db5c');
+    });
   });
 
   group('sm3: hmac', () {
