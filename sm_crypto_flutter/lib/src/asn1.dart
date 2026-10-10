@@ -72,9 +72,7 @@ String encodeDer(BigInt r, BigInt s) {
     );
   }
   if (lenHex.substring(0, 2) == '00') {
-    throw const FormatException(
-      'invalid DER: length has leading zero byte',
-    );
+    throw const FormatException('invalid DER: length has leading zero byte');
   }
   return (len, 1 + numBytes);
 }
@@ -152,9 +150,7 @@ void _assertMinimalInteger(String valueHex) {
 
   // S 必须刚好到 SEQUENCE 末尾
   if (sNext != input.length) {
-    throw const FormatException(
-      'invalid DER: trailing bytes inside SEQUENCE',
-    );
+    throw const FormatException('invalid DER: trailing bytes inside SEQUENCE');
   }
 
   return (

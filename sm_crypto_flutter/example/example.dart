@@ -55,10 +55,14 @@ void sm2Demo() {
 
   final compressed = SM2.compressPublicKeyHex(publicKey);
   print('公钥压缩为 66 位       = $compressed');
-  print('压缩前后等价           = '
-      '${SM2.comparePublicKeyHex(publicKey, compressed)}');
-  print('公钥可由私钥推导一致   = '
-      '${SM2.getPublicKeyFromPrivateKey(privateKey) == publicKey}');
+  print(
+    '压缩前后等价           = '
+    '${SM2.comparePublicKeyHex(publicKey, compressed)}',
+  );
+  print(
+    '公钥可由私钥推导一致   = '
+    '${SM2.getPublicKeyFromPrivateKey(privateKey) == publicKey}',
+  );
 
   // 加密：默认 C1C3C2（mode 0 = C1C2C3）；C1 占前 128 位 hex
   final cipher = SM2.doEncrypt(_msg, publicKey);
@@ -70,10 +74,16 @@ void sm2Demo() {
   final signature = SM2.doSignature(_msg, privateKey);
   final derSignature = SM2.doSignature(_msg, privateKey, der: true);
   print('签名（r‖s）长度        = ${signature.length}');
-  print('验签 r‖s               = '
-      '${SM2.doVerifySignature(_msg, signature, publicKey)}');
-  print('验签 DER               = '
-      '${SM2.doVerifySignature(_msg, derSignature, publicKey, der: true)}');
-  print('篡改消息后验签         = '
-      '${SM2.doVerifySignature('$_msg!', signature, publicKey)}');
+  print(
+    '验签 r‖s               = '
+    '${SM2.doVerifySignature(_msg, signature, publicKey)}',
+  );
+  print(
+    '验签 DER               = '
+    '${SM2.doVerifySignature(_msg, derSignature, publicKey, der: true)}',
+  );
+  print(
+    '篡改消息后验签         = '
+    '${SM2.doVerifySignature('$_msg!', signature, publicKey)}',
+  );
 }

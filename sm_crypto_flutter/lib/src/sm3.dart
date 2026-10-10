@@ -59,7 +59,8 @@ class SM3 {
       final start = 64 * block;
       for (var j = 0; j < 16; j++) {
         final o = start + j * 4;
-        w[j] = ((m[o] & 0xff) << 24) |
+        w[j] =
+            ((m[o] & 0xff) << 24) |
             ((m[o + 1] & 0xff) << 16) |
             ((m[o + 2] & 0xff) << 8) |
             (m[o + 3] & 0xff);
@@ -67,7 +68,8 @@ class SM3 {
 
       // W16 ～ W67
       for (var j = 16; j < 68; j++) {
-        w[j] = (_p1((w[j - 16] ^ w[j - 9] ^ _rotl(w[j - 3], 15)) & 0xffffffff) ^
+        w[j] =
+            (_p1((w[j - 16] ^ w[j - 9] ^ _rotl(w[j - 3], 15)) & 0xffffffff) ^
                 _rotl(w[j - 13], 7) ^
                 w[j - 6]) &
             0xffffffff;
@@ -92,17 +94,14 @@ class SM3 {
         final ss1 = _rotl((_rotl(a, 12) + e + _rotl(t, j)) & 0xffffffff, 7);
         final ss2 = (ss1 ^ _rotl(a, 12)) & 0xffffffff;
 
-        final tt1 = ((j <= 15
-                    ? (a ^ b ^ c)
-                    : ((a & b) | (a & c) | (b & c))) &
+        final tt1 =
+            ((j <= 15 ? (a ^ b ^ c) : ((a & b) | (a & c) | (b & c))) &
                 0xffffffff) +
             d +
             ss2 +
             w1[j];
-        final tt2 = ((j <= 15
-                    ? (e ^ f ^ g)
-                    : ((e & f) | (~e & g))) &
-                0xffffffff) +
+        final tt2 =
+            ((j <= 15 ? (e ^ f ^ g) : ((e & f) | (~e & g))) & 0xffffffff) +
             h +
             ss1 +
             w[j];

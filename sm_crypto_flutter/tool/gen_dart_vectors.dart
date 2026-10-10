@@ -7,9 +7,9 @@ import 'dart:io';
 import 'package:sm_crypto_flutter/sm_crypto_flutter.dart';
 
 void main() {
-  final jsVectors = jsonDecode(
-    File('tool/interop_vectors.json').readAsStringSync(),
-  ) as Map<String, dynamic>;
+  final jsVectors =
+      jsonDecode(File('tool/interop_vectors.json').readAsStringSync())
+          as Map<String, dynamic>;
   final keypair = jsVectors['keypair'] as Map;
   final privateKey = keypair['privateKey'] as String;
   final publicKey = keypair['publicKey'] as String;
@@ -37,8 +37,12 @@ void main() {
         'hash': true,
         'der': false,
         'userId': 'testUserId',
-        'sig': SM2.doSignature(msg, privateKey,
-            publicKey: publicKey, userId: 'testUserId'),
+        'sig': SM2.doSignature(
+          msg,
+          privateKey,
+          publicKey: publicKey,
+          userId: 'testUserId',
+        ),
       },
     ],
   };

@@ -73,11 +73,12 @@ class SM2 {
     radix: 16,
   );
   static final ECCurveFp _curve = ECCurveFp(_p, _a, _b);
-  static final ECPointFp _g = _curve.decodePointHex(
-    '04'
-    '32C4AE2C1F1981195F9904466A39C9948FE30BBFF2660BE1715A4589334C74C7'
-    'BC3736A2F4F6779C59BDCEE36B692153D0A9877CC62A474002DF32E52139F0A0',
-  )!;
+  static final ECPointFp _g =
+      _curve.decodePointHex(
+        '04'
+        '32C4AE2C1F1981195F9904466A39C9948FE30BBFF2660BE1715A4589334C74C7'
+        'BC3736A2F4F6779C59BDCEE36B692153D0A9877CC62A474002DF32E52139F0A0',
+      )!;
   static final Random _rng = Random.secure();
 
   /// 生成密钥对：publicKey = privateKey · G（js `generateKeyPairHex`）。
@@ -102,7 +103,8 @@ class SM2 {
 
     final privateKey = leftPad(d.toRadixString(16), 64);
     final p = _g.multiply(d);
-    final publicKey = '04' +
+    final publicKey =
+        '04' +
         leftPad(p.getX().toBigInteger().toRadixString(16), 64) +
         leftPad(p.getY().toBigInteger().toRadixString(16), 64);
     return KeyPair(privateKey: privateKey, publicKey: publicKey);
@@ -135,9 +137,9 @@ class SM2 {
     final x = point.getX();
     final y = point.getY();
     // 验证 y² 是否等于 x³ + ax + b
-    return y
-        .square()
-        .equals(x.multiply(x.square()).add(x.multiply(_curve.a)).add(_curve.b));
+    return y.square().equals(
+      x.multiply(x.square()).add(x.multiply(_curve.a)).add(_curve.b),
+    );
   }
 
   /// 验证两个公钥是否等价（支持压缩/未压缩混用，js `comparePublicKeyHex`）。
@@ -154,8 +156,11 @@ class SM2 {
   ///
   /// [msg] 为 utf8 串或字节数组；[cipherMode] 1 = C1C3C2（默认），0 = C1C2C3。
   /// 返回 hex 串。公钥非法抛 [ArgumentError]。
-  static String doEncrypt(dynamic msg, String publicKey,
-      [int cipherMode = c1c3c2]) {
+  static String doEncrypt(
+    dynamic msg,
+    String publicKey, [
+    int cipherMode = c1c3c2,
+  ]) {
     if (!verifyPublicKey(publicKey)) {
       throw ArgumentError.value(publicKey, 'publicKey', 'Invalid public key');
     }
@@ -171,8 +176,12 @@ class SM2 {
 
     // (x2, y2) = k · publicKey
     final p = pubPoint.multiply(k);
-    final x2 = hexToBytes(leftPad(p.getX().toBigInteger().toRadixString(16), 64));
-    final y2 = hexToBytes(leftPad(p.getY().toBigInteger().toRadixString(16), 64));
+    final x2 = hexToBytes(
+      leftPad(p.getX().toBigInteger().toRadixString(16), 64),
+    );
+    final y2 = hexToBytes(
+      leftPad(p.getY().toBigInteger().toRadixString(16), 64),
+    );
 
     // c3 = hash(x2 ‖ msg ‖ y2)
     final c3 = bytesToHex(SM3.digest([...x2, ...msgBytes, ...y2]));
@@ -191,8 +200,12 @@ class SM2 {
   /// [cipherMode] 1 = C1C3C2（默认），0 = C1C2C3；[output] `'string'` 返回
   /// utf8 串（默认），`'array'` 返回字节数组。解密失败（密文非法或校验不过）
   /// 静默返回 `''` 或 `[]`，与 js 行为一致。
-  static dynamic doDecrypt(String encryptData, String privateKey,
-      [int cipherMode = c1c3c2, String output = 'string']) {
+  static dynamic doDecrypt(
+    String encryptData,
+    String privateKey, [
+    int cipherMode = c1c3c2,
+    String output = 'string',
+  ]) {
     dynamic fail() => output == 'array' ? <int>[] : '';
 
     final String c3;
@@ -224,8 +237,12 @@ class SM2 {
     if (c1 == null || !verifyPublicKey('04' + c1Hex)) return fail();
 
     final p = c1.multiply(d);
-    final x2 = hexToBytes(leftPad(p.getX().toBigInteger().toRadixString(16), 64));
-    final y2 = hexToBytes(leftPad(p.getY().toBigInteger().toRadixString(16), 64));
+    final x2 = hexToBytes(
+      leftPad(p.getX().toBigInteger().toRadixString(16), 64),
+    );
+    final y2 = hexToBytes(
+      leftPad(p.getY().toBigInteger().toRadixString(16), 64),
+    );
 
     final t = _kdf([...x2, ...y2], msg.length);
     for (var i = 0; i < msg.length; i++) {
@@ -412,13 +429,15 @@ class SM2 {
     final out = <int>[];
     var ct = 1;
     while (out.length < len) {
-      out.addAll(SM3.digest([
-        ...z,
-        (ct >> 24) & 0xff,
-        (ct >> 16) & 0xff,
-        (ct >> 8) & 0xff,
-        ct & 0xff,
-      ]));
+      out.addAll(
+        SM3.digest([
+          ...z,
+          (ct >> 24) & 0xff,
+          (ct >> 16) & 0xff,
+          (ct >> 8) & 0xff,
+          ct & 0xff,
+        ]),
+      );
       ct++;
     }
     return out.sublist(0, len);

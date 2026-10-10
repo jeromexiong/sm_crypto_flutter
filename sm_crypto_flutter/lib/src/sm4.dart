@@ -13,6 +13,9 @@ class SM4 {
   static const int _round = 32;
   static const int _block = 16;
 
+  // S-box 与 CK 是国密标准查找表：保持每行 8 项的紧凑排版（与标准文档表格一致），
+  // 逐项拆行后不可读、diff 噪声极大。
+  // dart format off
   static const List<int> _sbox = [
     0xd6, 0x90, 0xe9, 0xfe, 0xcc, 0xe1, 0x3d, 0xb7, 0x16, 0xb6, 0x14, 0xc2,
     0x28, 0xfb, 0x2c, 0x05, 0x2b, 0x67, 0x9a, 0x76, 0x2a, 0xbe, 0x04, 0xc3,
@@ -48,6 +51,7 @@ class SM4 {
     0xa0a7aeb5, 0xbcc3cad1, 0xd8dfe6ed, 0xf4fb0209,
     0x10171e25, 0x2c333a41, 0x484f565d, 0x646b7279,
   ];
+  // dart format on
 
   /// 加密（js `sm4.encrypt`）。
   ///
@@ -65,7 +69,15 @@ class SM4 {
     dynamic iv,
     String output = 'string',
   }) {
-    return _sm4(msg, key, 1, padding: padding, mode: mode, iv: iv, output: output);
+    return _sm4(
+      msg,
+      key,
+      1,
+      padding: padding,
+      mode: mode,
+      iv: iv,
+      output: output,
+    );
   }
 
   /// 解密（js `sm4.decrypt`）。
@@ -82,7 +94,15 @@ class SM4 {
     dynamic iv,
     String output = 'string',
   }) {
-    return _sm4(data, key, 0, padding: padding, mode: mode, iv: iv, output: output);
+    return _sm4(
+      data,
+      key,
+      0,
+      padding: padding,
+      mode: mode,
+      iv: iv,
+      output: output,
+    );
   }
 
   static dynamic _sm4(
@@ -104,7 +124,8 @@ class SM4 {
     }
 
     // 检查 key：hex 串或字节数组，必须 128 比特
-    final keyBytes = key is String ? hexToBytes(key) : List<int>.from(key as List);
+    final keyBytes =
+        key is String ? hexToBytes(key) : List<int>.from(key as List);
     if (keyBytes.length != _block) {
       throw ArgumentError.value(key, 'key', 'key is invalid');
     }
@@ -113,7 +134,8 @@ class SM4 {
     final List<int> input;
     if (inArray is String) {
       input = List<int>.from(
-          cryptFlag != _decrypt ? utf8ToBytes(inArray) : hexToBytes(inArray));
+        cryptFlag != _decrypt ? utf8ToBytes(inArray) : hexToBytes(inArray),
+      );
     } else {
       input = List<int>.from(inArray as List);
     }
@@ -149,9 +171,8 @@ class SM4 {
       }
 
       out.addAll(blockOut);
-      lastVector = isCbc
-          ? (cryptFlag != _decrypt ? blockOut : block)
-          : lastVector;
+      lastVector =
+          isCbc ? (cryptFlag != _decrypt ? blockOut : block) : lastVector;
       point += _block;
     }
 
@@ -178,7 +199,8 @@ class SM4 {
   static List<int> _cryptBlock(List<int> input, List<int> roundKey) {
     final x = List<int>.filled(4, 0);
     for (var i = 0; i < 4; i++) {
-      x[i] = ((input[4 * i] & 0xff) << 24) |
+      x[i] =
+          ((input[4 * i] & 0xff) << 24) |
           ((input[4 * i + 1] & 0xff) << 16) |
           ((input[4 * i + 2] & 0xff) << 8) |
           (input[4 * i + 3] & 0xff);
@@ -214,7 +236,8 @@ class SM4 {
     final roundKey = List<int>.filled(_round, 0);
     final x = List<int>.filled(4, 0);
     for (var i = 0; i < 4; i++) {
-      x[i] = ((key[4 * i] & 0xff) << 24) |
+      x[i] =
+          ((key[4 * i] & 0xff) << 24) |
           ((key[4 * i + 1] & 0xff) << 16) |
           ((key[4 * i + 2] & 0xff) << 8) |
           (key[4 * i + 3] & 0xff);
@@ -269,7 +292,9 @@ class SM4 {
   }
 
   /// 线性变换，加密/解密用。
-  static int _l1(int b) => (b ^ _rotl(b, 2) ^ _rotl(b, 10) ^ _rotl(b, 18) ^ _rotl(b, 24)) & 0xffffffff;
+  static int _l1(int b) =>
+      (b ^ _rotl(b, 2) ^ _rotl(b, 10) ^ _rotl(b, 18) ^ _rotl(b, 24)) &
+      0xffffffff;
 
   /// 线性变换，生成轮密钥用。
   static int _l2(int b) => (b ^ _rotl(b, 13) ^ _rotl(b, 23)) & 0xffffffff;

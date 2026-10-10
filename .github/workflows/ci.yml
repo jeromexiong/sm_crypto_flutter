@@ -21,6 +21,10 @@ jobs:
         run: dart pub get
       - name: Analyze
         run: dart analyze
+      # pub.dev 的「Pass static analysis」会计入 dart format 结果（不符即扣 10 分），
+      # 所以格式检查也进 CI
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
       - name: Run tests
         run: dart test
       # 发布前哨：把 pubspec 字段、LICENSE、文件清单等发布期校验提前到每次 push

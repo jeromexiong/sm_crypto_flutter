@@ -9,9 +9,9 @@ import 'package:test/test.dart';
 /// 向量由 `node tool/gen_vectors.cjs` 生成（sm-crypto-js 0.5.7），
 /// 断言 Dart 实现能解密 js 密文、验证 js 签名、复现 js 的杂凑输出。
 void main() {
-  final vectors = jsonDecode(
-    File('tool/interop_vectors.json').readAsStringSync(),
-  ) as Map<String, dynamic>;
+  final vectors =
+      jsonDecode(File('tool/interop_vectors.json').readAsStringSync())
+          as Map<String, dynamic>;
 
   final privateKey = (vectors['keypair'] as Map)['privateKey'] as String;
   final publicKey = (vectors['keypair'] as Map)['publicKey'] as String;
@@ -32,23 +32,27 @@ void main() {
   group('js encrypt -> dart decrypt', () {
     test('C1C3C2 / C1C2C3', () {
       expect(
-          SM2.doDecrypt(vectors['cipherC1C3C2'] as String, privateKey, 1), msg);
+        SM2.doDecrypt(vectors['cipherC1C3C2'] as String, privateKey, 1),
+        msg,
+      );
       expect(
-          SM2.doDecrypt(vectors['cipherC1C2C3'] as String, privateKey, 0), msg);
+        SM2.doDecrypt(vectors['cipherC1C2C3'] as String, privateKey, 0),
+        msg,
+      );
     });
 
     test('compressed public key cipher', () {
       expect(
-          SM2.doDecrypt(
-              vectors['cipherCompressedKey'] as String, privateKey, 1),
-          msg);
+        SM2.doDecrypt(vectors['cipherCompressedKey'] as String, privateKey, 1),
+        msg,
+      );
     });
 
     test('byte array cipher', () {
       expect(
-          SM2.doDecrypt(
-              vectors['cipherBytes'] as String, privateKey, 1, 'array'),
-          bytesMsg);
+        SM2.doDecrypt(vectors['cipherBytes'] as String, privateKey, 1, 'array'),
+        bytesMsg,
+      );
     });
 
     test('dart encrypt -> dart decrypt round trip', () {
@@ -72,26 +76,42 @@ void main() {
 
       test('signature #$i (hash:$hash der:$der userId:$userId)', () {
         expect(
-            SM2.doVerifySignature(msg, sig, publicKey,
-                hash: hash, der: der, userId: userId),
-            true);
+          SM2.doVerifySignature(
+            msg,
+            sig,
+            publicKey,
+            hash: hash,
+            der: der,
+            userId: userId,
+          ),
+          true,
+        );
         // 篡改消息必须验签失败
         expect(
-            SM2.doVerifySignature('$msg!', sig, publicKey,
-                hash: hash, der: der, userId: userId),
-            false);
+          SM2.doVerifySignature(
+            '$msg!',
+            sig,
+            publicKey,
+            hash: hash,
+            der: der,
+            userId: userId,
+          ),
+          false,
+        );
       });
     }
   });
 
   group('sm3 vectors from js', () {
-    final sm3Vectors = (vectors['sm3Vectors'] as List).cast<Map<String, dynamic>>();
+    final sm3Vectors =
+        (vectors['sm3Vectors'] as List).cast<Map<String, dynamic>>();
     for (var i = 0; i < sm3Vectors.length; i++) {
       final v = sm3Vectors[i];
       test('sm3 vector #$i', () {
-        final input = v.containsKey('bytes')
-            ? (v['bytes'] as List).cast<int>()
-            : v['input'] as String;
+        final input =
+            v.containsKey('bytes')
+                ? (v['bytes'] as List).cast<int>()
+                : v['input'] as String;
         expect(SM3.hash(input), v['hash']);
       });
     }
@@ -101,9 +121,10 @@ void main() {
     for (var i = 0; i < hmacVectors.length; i++) {
       final v = hmacVectors[i];
       test('hmac vector #$i', () {
-        final input = v.containsKey('bytes')
-            ? (v['bytes'] as List).cast<int>()
-            : v['input'] as String;
+        final input =
+            v.containsKey('bytes')
+                ? (v['bytes'] as List).cast<int>()
+                : v['input'] as String;
         expect(SM3.hash(input, key: v['key']), v['hash']);
       });
     }
@@ -116,21 +137,38 @@ void main() {
       final v = sm4Vectors[i];
       test('sm4 vector #$i', () {
         final msgOrBytes =
-            v.containsKey('bytes') ? (v['bytes'] as List).cast<int>() : v['msg'];
+            v.containsKey('bytes')
+                ? (v['bytes'] as List).cast<int>()
+                : v['msg'];
         final ct = v['ct'] as String;
 
         // dart 加密结果必须与 js 一致（确定性输入）
         expect(
-            SM4.encrypt(msgOrBytes, v['key'],
-                mode: v['mode'] as String?, iv: v['iv']),
-            ct);
+          SM4.encrypt(
+            msgOrBytes,
+            v['key'],
+            mode: v['mode'] as String?,
+            iv: v['iv'],
+          ),
+          ct,
+        );
 
         // js 密文必须能被 dart 解密（字节输入按 array 输出对比）
-        final decrypted = msgOrBytes is List
-            ? SM4.decrypt(ct, v['key'],
-                mode: v['mode'] as String?, iv: v['iv'], output: 'array')
-            : SM4.decrypt(ct, v['key'],
-                mode: v['mode'] as String?, iv: v['iv']);
+        final decrypted =
+            msgOrBytes is List
+                ? SM4.decrypt(
+                  ct,
+                  v['key'],
+                  mode: v['mode'] as String?,
+                  iv: v['iv'],
+                  output: 'array',
+                )
+                : SM4.decrypt(
+                  ct,
+                  v['key'],
+                  mode: v['mode'] as String?,
+                  iv: v['iv'],
+                );
         expect(decrypted, msgOrBytes);
       });
     }

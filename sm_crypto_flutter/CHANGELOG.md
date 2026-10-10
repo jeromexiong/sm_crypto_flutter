@@ -1,15 +1,22 @@
+## 0.1.2
+
+* Fix code formatting so the package passes the pub.dev static analysis check
+* Require Dart 3.7 or newer
+* Write the package description and this changelog in English, as pub.dev requires
+* Check formatting in CI
+
 ## 0.1.1
 
-* 新增可运行示例 `example/example.dart`（SM3 杂凑/HMAC、SM4 ECB/CBC、SM2 加解密与签名验签）
-* 发布链路改为 GitHub Actions tag 触发（pub.dev automated publishing + OIDC）；无 API 变更
+* Add a runnable example (`example/example.dart`) covering SM3, SM4 and SM2
+* Publish releases from GitHub Actions on tag push (pub.dev automated publishing + OIDC)
 
 ## 0.1.0
 
-* 初始版本发布，API 与 sm-crypto-js 对齐并保持互操作
-* SM2: 椭圆曲线公钥密码算法
-  * 密钥对生成（支持自定义随机数）
-  * 公钥压缩 / 比较 / 验证
-  * 加密/解密（支持 C1C2C3 和 C1C3C2 格式，字符串/字节数组输入输出）
-  * 数字签名/验签（SM3 杂凑/纯签名、DER 严格规范编码、userId、点池加速）
-* SM3: 密码杂凑算法（256 位哈希 + HMAC-SM3）
-* SM4: 分组密码算法（ECB/CBC、pkcs#5/pkcs#7/none 填充）
+* Initial release: SM2, SM3 and SM4, API-aligned with sm-crypto-js and interoperable with it
+* SM2: elliptic curve public key cryptography
+  * Key pair generation (custom random supported)
+  * Public key compression / comparison / verification
+  * Encryption and decryption (C1C2C3 and C1C3C2, string or byte array in/out)
+  * Signature and verification (SM3 hash or raw, strict DER encoding, userId, point pool)
+* SM3: 256-bit hash and HMAC-SM3
+* SM4: block cipher (ECB / CBC, pkcs#5 / pkcs#7 / none padding)

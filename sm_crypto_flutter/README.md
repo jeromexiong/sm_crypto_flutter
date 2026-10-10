@@ -16,8 +16,10 @@
 
 ```yaml
 dependencies:
-  sm_crypto_flutter: ^0.1.0
+  sm_crypto_flutter: ^0.1.2
 ```
+
+需要 Dart 3.7 或更高版本（Flutter 用户对应 Flutter 3.29+）。
 
 ## sm2
 

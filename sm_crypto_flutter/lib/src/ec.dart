@@ -74,10 +74,12 @@ class ECPointFp {
     if (isInfinity()) return other.isInfinity();
     if (other.isInfinity()) return isInfinity();
 
-    final u = (other.y!.toBigInteger() * z - y!.toBigInteger() * other.z) % curve.q;
+    final u =
+        (other.y!.toBigInteger() * z - y!.toBigInteger() * other.z) % curve.q;
     if (u != BigInt.zero) return false;
 
-    final v = (other.x!.toBigInteger() * z - x!.toBigInteger() * other.z) % curve.q;
+    final v =
+        (other.x!.toBigInteger() * z - x!.toBigInteger() * other.z) % curve.q;
     return v == BigInt.zero;
   }
 
@@ -222,12 +224,14 @@ class ECCurveFp {
       case 2:
       case 3:
         final x = fromBigInteger(BigInt.parse(s.substring(2), radix: 16));
-        var y = fromBigInteger(x
-            .multiply(x.square())
-            .add(x.multiply(a))
-            .add(b)
-            .toBigInteger()
-            .modPow(q ~/ BigInt.from(4) + BigInt.one, q));
+        var y = fromBigInteger(
+          x
+              .multiply(x.square())
+              .add(x.multiply(a))
+              .add(b)
+              .toBigInteger()
+              .modPow(q ~/ BigInt.from(4) + BigInt.one, q),
+        );
         final prefix = BigInt.parse(s.substring(0, 2), radix: 16) - BigInt.two;
         if (y.toBigInteger() % BigInt.two != prefix) {
           y = y.negate();
