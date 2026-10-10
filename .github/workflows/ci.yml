@@ -22,9 +22,11 @@ jobs:
       - name: Analyze
         run: dart analyze
       # pub.dev 的「Pass static analysis」会计入 dart format 结果（不符即扣 10 分），
-      # 所以格式检查也进 CI
-      - name: Verify formatting
-        run: dart format --output=none --set-exit-if-changed .
+      # 但 pana 只检查 lib/。这里同样只查 lib/：不同 SDK 版本的格式化器对 test/tool
+      # 文件可能给出不同结果（实测 CI 的 Dart 3.13 与本地 3.12 对 test/sm4_test.dart
+      # 输出不同），全量检查会造成与发布无关的假红。
+      - name: Verify formatting (lib)
+        run: dart format --output=none --set-exit-if-changed lib
       - name: Run tests
         run: dart test
       # 发布前哨：把 pubspec 字段、LICENSE、文件清单等发布期校验提前到每次 push
