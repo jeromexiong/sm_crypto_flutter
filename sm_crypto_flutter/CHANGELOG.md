@@ -1,3 +1,8 @@
+## 0.1.1
+
+* 新增可运行示例 `example/example.dart`（SM3 杂凑/HMAC、SM4 ECB/CBC、SM2 加解密与签名验签）
+* 发布链路改为 GitHub Actions tag 触发（pub.dev automated publishing + OIDC）；无 API 变更
+
 ## 0.1.0
 
 * 初始版本发布，API 与 sm-crypto-js 对齐并保持互操作

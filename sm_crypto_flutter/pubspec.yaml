@@ -1,6 +1,6 @@
 name: sm_crypto_flutter
 description: "国密算法 SM2、SM3、SM4 的纯 Dart 实现，API 与 sm-crypto（JavaScript）对齐，密文、签名与杂凑均与 js 版双向互操作。可在 Flutter 与 Dart VM 中使用。"
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/jeromexiong/sm_crypto_flutter
 repository: https://github.com/jeromexiong/sm_crypto_flutter
 issue_tracker: https://github.com/jeromexiong/sm_crypto_flutter/issues

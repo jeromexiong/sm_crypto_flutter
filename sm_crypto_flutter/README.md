@@ -152,6 +152,15 @@ SM4.decrypt(encryptData, key, mode: 'cbc', iv: 'fedcba98765432100123456789abcdef
 - 异常类型为 `ArgumentError` / `FormatException`（js 抛 `Error`），消息文本一致。
 - 非法 utf8 解码抛 `FormatException`（js 抛 `Error('Malformed UTF-8 data')`）。
 
+## 示例
+
+完整可运行示例见 [`example/example.dart`](example/example.dart)——SM3 杂凑/HMAC、SM4 ECB/CBC、
+SM2 加解密与签名验签：
+
+```bash
+dart run example/example.dart
+```
+
 ## 开发与验证
 
 ```bash
