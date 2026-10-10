@@ -1,4 +1,4 @@
-import 'package:sm_crypto/sm_crypto.dart';
+import 'package:sm_crypto_flutter/sm_crypto_flutter.dart';
 import 'package:test/test.dart';
 
 /// 移植自 sm-crypto-js/test/sm4.test.js 的固定向量。

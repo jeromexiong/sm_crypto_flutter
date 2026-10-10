@@ -15,7 +15,7 @@
   js 版不一致（缺公钥压缩、HMAC、`hash:false` 纯签名、`output:'array'`、
   严格 DER 校验等）。
 
-目标：产出一个**纯 Dart 包 `sm_crypto`**，API 与语义对齐 sm-crypto-js，
+目标：产出一个**纯 Dart 包 `sm_crypto_flutter`**，API 与语义对齐 sm-crypto-js，
 输出与 js 版**可互操作**（同一输入密文/签名/hmac 互通），并以 js 测试向量作为
 验收基准。
 
@@ -24,7 +24,7 @@
 | 决策点 | 结论 | 理由 |
 |---|---|---|
 | 产物形态 | 纯 Dart package（不依赖 Flutter） | 算法无平台通道需求；可同时用于 Flutter / Dart VM / 测试 |
-| 落点 | 工作区根下新建 `sm_crypto/`，`gm_crypto` 不动 | gm_crypto 定位为实现参考；避免破坏其插件结构 |
+| 落点 | 工作区根下新建 `sm_crypto_flutter/`，`gm_crypto` 不动 | gm_crypto 定位为实现参考；避免破坏其插件结构 |
 | API 风格 | 镜像 js 的函数名与选项语义，以 `SM2/SM3/SM4` 静态方法呈现 | 跨端团队可对照 js 文档直接使用；与 gm_crypto 的类风格兼容 |
 | 入参形态 | msg/key 接受 `String`（utf8 或 hex 视语义）或 `List<int>` | 忠实镜像 js 的 `string \| Array` 双态入参 |
 | options 对象 | js `{hash, der, userId, ...}` → Dart 命名参数 | Dart 惯用法，语义一一对应 |
@@ -39,7 +39,7 @@
 
 ## 3. API 映射表
 
-| sm-crypto-js | sm_crypto (Dart) | 说明 |
+| sm-crypto-js | sm_crypto_flutter (Dart) | 说明 |
 |---|---|---|
 | `sm2.generateKeyPairHex(a?)` | `SM2.generateKeyPairHex([dynamic random])` → `KeyPair` | random 支持十进制字符串/`BigInt`（js 透传 BigInteger 构造器的收敛） |
 | `sm2.compressPublicKeyHex(pk)` | `SM2.compressPublicKeyHex(pk)` | 130 位 → 66 位，非法长度抛 `ArgumentError` |
@@ -63,13 +63,13 @@
 ## 4. 架构与文件结构
 
 ```
-sm_crypto/
-├── pubspec.yaml              # name: sm_crypto，零运行时依赖
+sm_crypto_flutter/
+├── pubspec.yaml              # name: sm_crypto_flutter，零运行时依赖
 ├── analysis_options.yaml
 ├── README.md                 # 用法 + 与 js 版的 API 对照
 ├── CHANGELOG.md
 ├── lib/
-│   ├── sm_crypto.dart        # 导出 SM2/SM3/SM4/KeyPair/SM2Point
+│   ├── sm_crypto_flutter.dart # 导出 SM2/SM3/SM4/KeyPair/SM2Point
 │   └── src/
 │       ├── sm2.dart          # 对外 API：加解密、签名验签、密钥工具
 │       ├── sm3.dart          # 杂凑 + HMAC-SM3
@@ -111,7 +111,7 @@ der:true 时对 (r,s) 做 DER SEQUENCE 编码。Z 值 = SM3(ENTL‖UID‖a‖b�
    非法 c1/r/s/公钥、userId 语义、DER 延展性拒绝）移植为 Dart 测试。
 3. **互操作向量**：用 `node` 直接 require `sm-crypto-js/src`（sm3/sm4 无依赖，
    sm2 需 `jsbn`）生成固定输入的期望输出，落地为 `interop_test.dart` 常量。
-4. 验收命令：`cd sm_crypto && dart pub get && dart test`（环境受限时降级为
+4. 验收命令：`cd sm_crypto_flutter && dart pub get && dart test`（环境受限时降级为
    自带 mini runner 的 `dart run tool/run_tests.dart`）。
 
 ## 7. 与 js 版的已知偏差

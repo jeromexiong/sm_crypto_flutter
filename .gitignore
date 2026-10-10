@@ -6,3 +6,6 @@ pubspec.lock
 
 # 系统文件
 .DS_Store
+
+# 互操作基准（外部 clone，不入库）：见 README 的「开发」一节
+sm-crypto-js/

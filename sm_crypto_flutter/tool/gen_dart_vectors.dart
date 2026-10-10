@@ -4,7 +4,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:sm_crypto/sm_crypto.dart';
+import 'package:sm_crypto_flutter/sm_crypto_flutter.dart';
 
 void main() {
   final jsVectors = jsonDecode(

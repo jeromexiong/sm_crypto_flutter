@@ -1,0 +1,29 @@
+name: ci
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  analyze-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        # 包在子目录里，所有 dart 命令都在包目录内执行
+        working-directory: sm_crypto_flutter
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dart-lang/setup-dart@v1
+      - name: Install dependencies
+        run: dart pub get
+      - name: Analyze
+        run: dart analyze
+      - name: Run tests
+        run: dart test
+      # 发布前哨：把 pubspec 字段、LICENSE、文件清单等发布期校验提前到每次 push
+      # （首版手动发布踩过的坑——比如 description 不足 60 字符——在这里就会红）
+      - name: Publish dry-run
+        run: dart pub publish --dry-run

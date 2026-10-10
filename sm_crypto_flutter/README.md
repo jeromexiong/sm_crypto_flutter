@@ -1,4 +1,9 @@
-# sm_crypto
+# sm_crypto_flutter
+
+[![pub package](https://img.shields.io/pub/v/sm_crypto_flutter.svg)](https://pub.dev/packages/sm_crypto_flutter)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+> 仓库：https://github.com/jeromexiong/sm_crypto_flutter ｜ pub.dev：[`sm_crypto_flutter`](https://pub.dev/packages/sm_crypto_flutter)
 
 国密算法 SM2、SM3、SM4 的纯 Dart 实现。API 与 [sm-crypto](https://github.com/juneandgreen/sm-crypto)（js）对齐，输出与 js 版**可互操作**（密文、签名、杂凑互通，双向实测通过）。
 
@@ -11,7 +16,7 @@
 
 ```yaml
 dependencies:
-  sm_crypto: ^0.1.0
+  sm_crypto_flutter: ^0.1.0
 ```
 
 ## sm2
@@ -19,7 +24,7 @@ dependencies:
 ### 获取密钥对
 
 ```dart
-import 'package:sm_crypto/sm_crypto.dart';
+import 'package:sm_crypto_flutter/sm_crypto_flutter.dart';
 
 final keypair = SM2.generateKeyPairHex();
 final publicKey = keypair.publicKey;   // 公钥（130 位，04 + x + y）
@@ -124,7 +129,7 @@ SM4.decrypt(encryptData, key, mode: 'cbc', iv: 'fedcba98765432100123456789abcdef
 
 ## 与 sm-crypto-js 的 API 对照
 
-| sm-crypto-js | sm_crypto (Dart) |
+| sm-crypto-js | sm_crypto_flutter (Dart) |
 |---|---|
 | `sm2.generateKeyPairHex(a?)` | `SM2.generateKeyPairHex([random])` |
 | `sm2.compressPublicKeyHex(pk)` | `SM2.compressPublicKeyHex(pk)` |
@@ -152,7 +157,16 @@ SM4.decrypt(encryptData, key, mode: 'cbc', iv: 'fedcba98765432100123456789abcdef
 ```bash
 dart pub get
 dart analyze
-dart test                              # 73 项测试（含 js 向量互操作）
+dart test                              # 75 项测试（含 js 向量互操作）
+dart pub publish --dry-run             # 发布前自检（文件清单 / pubspec / LICENSE）
+```
+
+双向互操作验证需要额外 clone 参考实现（不入库），放在本包同级目录：
+
+```bash
+git clone https://github.com/juneandgreen/sm-crypto sm-crypto-js   # 在仓库根目录执行
+cd sm-crypto-js && npm install && cd ../sm_crypto_flutter
+
 node tool/gen_vectors.cjs              # 用 sm-crypto-js 重新生成互操作向量
 dart run tool/gen_dart_vectors.dart \
   && node tool/check_interop.cjs       # dart -> js 方向互操作验证
@@ -160,6 +174,8 @@ dart run tool/gen_dart_vectors.dart \
 
 互操作测试向量由 `sm-crypto-js` 0.5.7 生成（`tool/interop_vectors.json`），
 js 测试用例（`sm-crypto-js/test/*.test.js`）已全部移植为 Dart 测试。
+
+发布流程（首版手动 + tag 触发自动发布）见仓库的 [`docs/publishing.md`](../docs/publishing.md)。
 
 ## 协议
 

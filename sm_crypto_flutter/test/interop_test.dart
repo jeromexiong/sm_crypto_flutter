@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:sm_crypto/sm_crypto.dart';
+import 'package:sm_crypto_flutter/sm_crypto_flutter.dart';
 import 'package:test/test.dart';
 
 /// 与 sm-crypto-js（参考实现）的互操作向量。

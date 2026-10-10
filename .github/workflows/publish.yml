@@ -1,0 +1,42 @@
+name: publish
+
+# 发布链路（对齐 identity_verification_flutter 的做法）：
+#   push tag vX.Y.Z → 校验 tag 在 main 上 → OIDC 认证 → dart pub publish --force
+#
+# ⚠️ 前提：pub.dev 上 sm_crypto_flutter 的 Admin → Automated publishing 已配置
+#    仓库 jeromexiong/sm_crypto_flutter + tag-pattern `v{{version}}`。
+#    pub.dev 只允许「push tag」触发的 Actions 发布，其它事件会被直接拒绝。
+# ⚠️ 新包的首个版本不能走这条路：pub.dev 规定新包必须本地 `dart pub publish`
+#    首发布（见 docs/publishing.md）。
+
+on:
+  push:
+    tags:
+      # 必须与 pub.dev 上配置的 tag-pattern（`v{{version}}`）一致
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  verify-tag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Require tag on main
+        run: |
+          git fetch origin main
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
+            echo "::error::Tags must point to a commit reachable from main"
+            exit 1
+          fi
+
+  publish:
+    needs: verify-tag
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # 必需：setup-dart 用它换取 GitHub OIDC token 完成 pub.dev 认证
+    # 官方可复用 workflow：内部完成 OIDC 换取 pub 凭据 + 校验 tag 与 pubspec version 一致
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with:
+      working-directory: sm_crypto_flutter

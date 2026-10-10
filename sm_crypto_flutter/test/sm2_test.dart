@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:sm_crypto/sm_crypto.dart';
+import 'package:sm_crypto_flutter/sm_crypto_flutter.dart';
 import 'package:test/test.dart';
 
 /// 移植自 sm-crypto-js/test/sm2.test.js 的行为用例。
