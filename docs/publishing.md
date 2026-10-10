@@ -4,6 +4,10 @@
 - 仓库：https://github.com/jeromexiong/sm_crypto_flutter
 - 发布方式：**首版本地手动** + **后续 tag 触发 GitHub Actions 自动发布**（对齐 `identity_verification_flutter`）
 
+> ✅ 链路已验证（2026-10-10）：`0.1.0` 本地手动发布（08:41 UTC）；
+> `0.1.1` 由 `git push origin v0.1.1` 触发的 Actions（OIDC）自动发布（08:47 UTC），
+> run 全绿——说明 pub.dev 的 repository + tag-pattern 配置与 workflow 对得上。
+
 ## 1. 首次发布（必须手动，且只能做一次）
 
 pub.dev 的限制：*自动发布只能用于已存在的包*（“Today, you can only automate publishing of

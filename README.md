@@ -22,6 +22,7 @@ cd sm_crypto_flutter
 dart pub get
 dart analyze
 dart test        # 75 项，含与 sm-crypto-js 的互操作向量
+dart run example/example.dart   # SM3 / SM4 / SM2 用法示例（可运行）
 ```
 
 与 js 版的双向互操作验证需要额外 clone 参考实现（不入库）：
