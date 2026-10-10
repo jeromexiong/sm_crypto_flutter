@@ -1,0 +1,7 @@
+# Dart/Node 构建产物
+.dart_tool/
+pubspec.lock
+node_modules/
+
+# 临时互操作产物（由 tool/gen_dart_vectors.dart 生成）
+tool/dart_vectors.json

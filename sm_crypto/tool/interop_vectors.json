@@ -1,0 +1,255 @@
+{
+  "generatedBy": "sm-crypto-js 0.5.7",
+  "keypair": {
+    "privateKey": "00000000000000000000000000000000000000000000000000006ffad60473b4",
+    "publicKey": "04c4422d1f3559a22c4b69605a9fa2593e2d211abef1a6a2f11fb4c88f3903fa17cc22ab067d19fbaac8237ef4e60a1ffada011c089156f6a0792efd229c478ec2",
+    "compressed": "02c4422d1f3559a22c4b69605a9fa2593e2d211abef1a6a2f11fb4c88f3903fa17"
+  },
+  "msg": "absasdagfadgadsfdfdsf",
+  "bytesMsg": [
+    97,
+    98,
+    115,
+    97,
+    115,
+    100,
+    97,
+    103,
+    102,
+    97,
+    100,
+    103,
+    97,
+    100,
+    115,
+    102,
+    100,
+    102,
+    100,
+    115,
+    102
+  ],
+  "cipherC1C3C2": "32a3ad561259e81d330a06f000540ebd35a7d335145e98029c06bc459ac5766c55b3ea4b51982ed9d8cf91d6d745674524cff8a07c07ead51817524568a44d214c2409e723f471a606423857df01d32943f2863c65bed511eff20b9a23666762bd2957a39cad488e73ce59e24860984b068f4f8f1a",
+  "cipherC1C2C3": "71ddb0caff1953b80ea411616f840645539be7224cd0d31c27c5acd12a39fc31c032f078f0041deae8f095dbf64da8eee3a1e8741b2abc3c1ca6c78f4706096ea9815c2504a5122486a43af990f1999e016978db511a67fc6def2ad0c5e786ef894f5026e671db7535d58a1104730d14ed6c13f9c0",
+  "cipherCompressedKey": "9b39c196853a2429fa0dfc3f6c031ea7795e49dadc538e7c67f80ea76493f44a4e02605926bb18b42ef2b51e9be08669fdea23b3c0681097644d347557844f169dd1be530b70bdfdbb9ce40c0fb996d903ae1ebb8cb902be80bea4db1a3a57ca595dec63e51d12849bd3038d0c3aa01368280ecc87",
+  "cipherBytes": "f2b300b83172974348ee30cbaf3bbc01e98fc8ae31c4f052fa17ad348c522e6acb84b6a1f3095928a5971a4d44f90c816435b334bb1852b00da82a7c3b07b96ad83224db8d43ad907c716fc8afa5b71c3e57edef84363bdec3b67d3ec32d0454e5a44262e7fd63c9b65af424801cca6d3d925a417f",
+  "signatures": [
+    {
+      "opts": {},
+      "sig": "bbaefc0d0938dc58907d2e157a3de3ac83017ceb4a9640972179e44cfc0d84533170e9981e11b1773ef0d6bc85468eea69000256fd8a84a60f0794ebe775c6d0"
+    },
+    {
+      "opts": {
+        "hash": true
+      },
+      "sig": "86b27012fec334f8e19853fa4d056302aa78a99ea756b19c39ab23bf2aef3732cfdf0c59eb00d45adb90e00bdcee8d64010a344fda758461c3ed0e5ed2887e1e"
+    },
+    {
+      "opts": {
+        "hash": false
+      },
+      "sig": "917d08a7224af46cfac2c9e1d18d9e94859f52d13a9ca45c818657efa5becfba14f59321e9fe6dd73e8b3338fa932a56c7a605cf007a46ce911c885071d52835"
+    },
+    {
+      "opts": {
+        "der": true
+      },
+      "sig": "304502210085212123e84415de64ffc0b280f47ce65c9a1e8f2901d3be24087421a4b27cc602203569fefcff8e205f53270c1510132630b0f77af724965b799feac25d45cb7eb9"
+    },
+    {
+      "opts": {
+        "hash": false,
+        "der": true
+      },
+      "sig": "3044022074ecf199c36dc53a3b6a4a51c04016f853549d5daa65ca044ca0a8e18ad59cf8022071785b6d4117ea71f0388391da7820ce70b68f82b91a48a9bab3c1f4c26295f5"
+    },
+    {
+      "opts": {
+        "publicKey": "04c4422d1f3559a22c4b69605a9fa2593e2d211abef1a6a2f11fb4c88f3903fa17cc22ab067d19fbaac8237ef4e60a1ffada011c089156f6a0792efd229c478ec2"
+      },
+      "sig": "22d85b002f49f67a6649d7e12f48674d6cc7e7bb50455d6f99bb6ef5f5d2891890ab99f14489eada6e3405113172696643b25c4bce3e2a6156191c3f7fc63234"
+    },
+    {
+      "opts": {
+        "userId": "testUserId",
+        "publicKey": "04c4422d1f3559a22c4b69605a9fa2593e2d211abef1a6a2f11fb4c88f3903fa17cc22ab067d19fbaac8237ef4e60a1ffada011c089156f6a0792efd229c478ec2"
+      },
+      "sig": "4cc8a4a1e1fd2c74fada3eaea07aee3db0d2ff87fb95f78dc9afdc9653fd4d94d77a4f37f17939313bcbfc477c80e392c3dea6665d2d0ca7e00eca9d71248401"
+    },
+    {
+      "opts": {
+        "userId": "",
+        "publicKey": "04c4422d1f3559a22c4b69605a9fa2593e2d211abef1a6a2f11fb4c88f3903fa17cc22ab067d19fbaac8237ef4e60a1ffada011c089156f6a0792efd229c478ec2"
+      },
+      "sig": "3faa8e253d3dcf22e56b99eaef678cce65ab4674c160ca20366cf15041a1cf38647c310fc6d70573734d7072761b2ebe1f698af412e627f68718fcee81daaaba"
+    }
+  ],
+  "sm3Vectors": [
+    {
+      "input": "abc",
+      "hash": "66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0"
+    },
+    {
+      "input": "abcdefghABCDEFGH12345678",
+      "hash": "d670c7f027fd5f9f0c163f4bfe98f9003fe597d3f52dbab0885ec2ca8dd23e9b"
+    },
+    {
+      "input": "你好",
+      "hash": "78e5c78c5322ca174089e58dc7790acf8ce9d542bee6ae4a5a0797d5e356be61"
+    },
+    {
+      "input": "今天天气真是不错",
+      "hash": "fff6e05118c782f5a2cea8bc2efec8819d0dc6d7d09cb9aa5c4ef14e673fa043"
+    },
+    {
+      "input": "🇨🇳𠮷😀😃😄😁😆😅",
+      "hash": "b6d217a24511ddb7593f13b74519038618cbb5b947fee20da3f0cd5503152c23"
+    },
+    {
+      "input": "hello world! 我是 juneandgreen.",
+      "hash": "ef1cc8e36012c1f1bc18034ab778ef800e8bb1b40c7a4c7177186f6fd521110e"
+    },
+    {
+      "bytes": [
+        97,
+        98,
+        115,
+        97,
+        115,
+        100,
+        97,
+        103,
+        102,
+        97,
+        100,
+        103,
+        97,
+        100,
+        115,
+        102,
+        100,
+        102,
+        100,
+        115,
+        102
+      ],
+      "hash": "901659a1a4bfebaf73e00766ec9ad10b331000beab114e74ce4ccce9a8944af4"
+    },
+    {
+      "input": "丧丙上䠉䰋不亐乑",
+      "hash": "382f78a3065187c40152d2f5ca283f8f4bf148909c763cfbdfa7efb943016552"
+    },
+    {
+      "input": "鱏8fpT肙腳荧HNQ",
+      "hash": "b67a77a89564b7be13fccf456e0ec39ad564eb46f4c54c6946b1d548efc4078d"
+    }
+  ],
+  "hmacVectors": [
+    {
+      "input": "abc",
+      "key": "daac25c1512fe50f79b0e4526b93f5c0e1460cef40b6dd44af13caec62e8c60e0d885f3c6d6fb51e530889e6fd4ac743a6d332e68a0f2a3923f42585dceb93e9",
+      "hash": "5c690e2b822a514017f1ccb9a61b6738714dbd17dbd6fdbc2fa662d122b6885d"
+    },
+    {
+      "bytes": [
+        49,
+        50,
+        51,
+        52,
+        53,
+        54
+      ],
+      "key": "31323334353637383930",
+      "hash": "bc1f71eef901223ae7a9718e3ae1dbf97353c81acb429b491bbdbefd2195b95e"
+    },
+    {
+      "bytes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "key": "0102030405060708",
+      "hash": "4f96bc3c0d60364e723212e46064c899ad1956bf763743a90834e7e62d047eed"
+    }
+  ],
+  "sm4Vectors": [
+    {
+      "msg": "hello world! 我是 juneandgreen.",
+      "key": "0123456789abcdeffedcba9876543210",
+      "ct": "0e395deb10f6e8a17e17823e1fd9bd98a1bff1df508b5b8a1efb79ec633d1bb129432ac1b74972dbe97bab04f024e89c"
+    },
+    {
+      "msg": "hello world! 我是 juneandgreen.",
+      "key": "0123456789abcdeffedcba9876543210",
+      "mode": "cbc",
+      "iv": "fedcba98765432100123456789abcdef",
+      "ct": "0d6cfa73c823b2ac0d6a92c564171892000fbea90be7a4d440bc58a9044fcb5f3d1615d91a6dbfb4dfb0c6915071527b"
+    },
+    {
+      "msg": "🇨🇳𠮷😀😃😄😁😆😅",
+      "key": "0123456789abcdeffedcba9876543210",
+      "ct": "a0b1aac2e6db928ddfc8a081a6661d0452b44e5720db106714ffc8cbee29bcf7d96b4d64bffd07553e6a2ee096523b7f"
+    },
+    {
+      "bytes": [
+        97,
+        98,
+        115,
+        97,
+        115,
+        100,
+        97,
+        103,
+        102,
+        97,
+        100,
+        103,
+        97,
+        100,
+        115,
+        102,
+        100,
+        102,
+        100,
+        115,
+        102
+      ],
+      "key": "0123456789abcdeffedcba9876543210",
+      "ct": "38e65e224468b043924fb4195484dfc255453a0575ecdc4c7e5e8d7632ad1c3c"
+    },
+    {
+      "bytes": [
+        97,
+        98,
+        115,
+        97,
+        115,
+        100,
+        97,
+        103,
+        102,
+        97,
+        100,
+        103,
+        97,
+        100,
+        115,
+        102,
+        100,
+        102,
+        100,
+        115,
+        102
+      ],
+      "key": "0123456789abcdeffedcba9876543210",
+      "mode": "cbc",
+      "iv": "fedcba98765432100123456789abcdef",
+      "ct": "1a733e959cd09f43aef3c3684fdbbd3de61a97ece655cb30b085886bf96adaf6"
+    }
+  ]
+}
